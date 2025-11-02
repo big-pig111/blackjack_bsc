@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LLM Blackjack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .top-bar.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .project-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .project-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .project-name {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .ca-text {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 auto;
+        }
+        
+        .x-link {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+        
+        .x-link:hover {
+            opacity: 0.8;
+        }
+        
+        #targetFrame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            z-index: 1;
+        }
+
+        .loader-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-mask">
+        <div class="loader"></div>
+    </div>
+    
+    <div class="top-bar">
+        <div class="project-info">
+            <img src="1.png" alt="Project Logo" class="project-logo">
+            <span class="project-name">Blackjack</span>
+        </div>
+        <div class="ca-text">ca：soon</div>
+        <a href="https://x.com/blackjack_bsc" target="_blank" class="x-link">X</a>
+    </div>
+    
+    <iframe id="targetFrame" src="https://www.llmblackjack.app/"></iframe>
+
+    <script>
+        const iframe = document.getElementById('targetFrame');
+        const topBar = document.querySelector('.top-bar');
+        const loaderMask = document.querySelector('.loader-mask');
+        
+        iframe.onload = function() {
+            topBar.classList.add('visible');
+            setTimeout(() => {
+                loaderMask.style.opacity = 0;
+                setTimeout(() => {
+                    loaderMask.style.display = 'none';
+                }, 500);
+            }, 100);
+        };
+        
+        setTimeout(() => {
+            if (!topBar.classList.contains('visible')) {
+                topBar.classList.add('visible');
+                loaderMask.style.opacity = 0;
+                setTimeout(() => {
+                    loaderMask.style.display = 'none';
+                }, 500);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
